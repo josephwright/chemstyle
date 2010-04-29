@@ -1,6 +1,5 @@
 % \iffalse meta-comment
 % !TEX program  = pdflatex
-% !TEX encoding = ISO-8859-1
 %<*internal>
 \iffalse
 %</internal>
@@ -120,7 +119,15 @@ This work consists of the file  chemstyle.dtx and
 \usepackage[final]{listings,microtype}
 \usepackage[osf]{mathpazo}
 \usepackage[version=3]{mhchem}
-\usepackage[crop=off,ext=dtx,final,runs=2]{auto-pst-pdf}
+\IfFileExists{auto-pst-pdf.sty}{
+  \usepackage[crop=off,ext=dtx,final,runs=2]{auto-pst-pdf}
+}{
+  \PackageWarning{chemstyle}{%
+    No auto-pst-pdf found:\MessageBreak
+    Compile documentation with latex \MessageBreak
+    (and not pdflatex)%
+  }
+}
 \usepackage[numbered]{hypdoc}
 \EnableCrossrefs
 \CodelineIndex
@@ -988,7 +995,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*package> 
 \ProvidesPackage{chemstyle}
-  [2009/10/26 v2.0b Schemes and style for chemistry]   
+  [2009/11/18 v2.0c Schemes and style for chemistry]   
 \RequirePackage{amstext,caption,chemscheme,xspace}
 \SetupKeyvalOptions{
   family=cst,
@@ -1162,7 +1169,8 @@ This work consists of the file  chemstyle.dtx and
   \@ifpackageloaded{SIunits}{}{%
     \@ifpackageloaded{unitsdef}{}{%
       \IfFileExists{siunitx.sty}{%
-        \RequirePackage[alsoload=synchem]{siunitx}
+        \RequirePackage{siunitx}
+        \requiresiconfigs{synchem}
       }{%
         \IfFileExists{SIunits.sty}{%
           \RequirePackage{SIunits}
@@ -1766,7 +1774,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*chemscheme>
 \ProvidesPackage{chemscheme}
-  [2009/10/26 v2.0b Schemes for chemistry] 
+  [2009/11/18 v2.0c Schemes for chemistry] 
 \RequirePackage{kvoptions,psfrag}
 \SetupKeyvalOptions{
   family=cst,
@@ -2255,7 +2263,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*angew>    
 \ProvidesFile{angew.chemstyle.cfg}
-  [2009/10/26 v2.0b Angew. Chem. journal style]
+  [2009/11/18 v2.0c Angew. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = false
@@ -2277,7 +2285,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*ic>    
 \ProvidesFile{ic.chemstyle.cfg}
-  [2009/10/26 v2.0b Inorg. Chem. journal style]
+  [2009/11/18 v2.0c Inorg. Chem. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2310,7 +2318,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jacs>    
 \ProvidesFile{jacs.chemstyle.cfg}
-  [2009/10/26 v2.0b J. Am. Chem. Soc. journal style]
+  [2009/11/18 v2.0c J. Am. Chem. Soc. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2343,7 +2351,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jomc>    
 \ProvidesFile{jomc.chemstyle.cfg}
-  [2009/10/26 v2.0b J. Organomet. Chem. journal style]
+  [2009/11/18 v2.0c J. Organomet. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = true,
@@ -2367,7 +2375,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jpc>    
 \ProvidesFile{jpc.chemstyle.cfg}
-  [2009/10/26 v2.0b J. Phys. Chem. journal style]
+  [2009/11/18 v2.0c J. Phys. Chem. journal style]
 \DeclareCaptionFormat{labelcaps}{\MakeUppercase{#1}#2#3}
 \captionsetup{
   font            = bf,
@@ -2401,7 +2409,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*orglett>    
 \ProvidesFile{orglett.chemstyle.cfg}
-  [2009/10/26 v2.0b Org. Lett. journal style]
+  [2009/11/18 v2.0c Org. Lett. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = bf,
@@ -2525,7 +2533,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*rsc>    
 \ProvidesFile{rsc.chemstyle.cfg}
-  [2009/10/26 v2.0b RSC journal style]
+  [2009/11/18 v2.0c RSC journal style]
 \captionsetup{
   labelsep  = quad,
   labelfont = bf
@@ -2541,7 +2549,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*tetlett>    
 \ProvidesFile{tetlett.chemstyle.cfg}
-  [2009/10/26 v2.0b Tetrahedron Lett. journal style]
+  [2009/11/18 v2.0c Tetrahedron Lett. journal style]
 \captionsetup{
   labelsep        = period,
   labelfont       = bf,
@@ -2571,7 +2579,7 @@ This work consists of the file  chemstyle.dtx and
 %%EndComments
 %%BeginProcSet: chemdict30 24 13
 % ChemDraw Laser Prep
-% Copyright © 1985-2005 CambridgeSoft Corp., All Rights Reserved
+% Copyright ï¿½ 1985-2005 CambridgeSoft Corp., All Rights Reserved
 userdict/chemdict30 210 dict put
 chemdict30 begin/version 24 def/sv 13 def
 /b{bind def}bind def/L{load def}b/R{null def}b/d/def L/a/add L/al/aload L
