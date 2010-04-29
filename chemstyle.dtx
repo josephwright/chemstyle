@@ -711,7 +711,8 @@ This work consists of the file  chemstyle.dtx and
 % issue.  The package makes use of the \pkg{psfrag} package, which
 % means that it can only directly produce DVI output (using \LaTeX).
 % However, direct PDF output using pdf\LaTeX\ is possible: see
-% Section~\ref{demo}.
+% Section~\ref{demo}. However, it \emph{will not work} with XeTeX
+% as the underlying \pkg{psfrag} package does not with XeTeX.
 % 
 % Getting automated numbers into schemes is a two step procedure. In
 % the first step, schemes (or other graphics) should be prepared as
@@ -997,7 +998,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*package> 
 \ProvidesPackage{chemstyle}
-  [2010/01/30 v2.0f Schemes and style for chemistry]   
+  [2010/03/29 v2.0g Schemes and style for chemistry]   
 \RequirePackage{amstext,caption,chemscheme,xspace}
 \SetupKeyvalOptions{
   family=cst,
@@ -1792,12 +1793,23 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*chemscheme>
 \ProvidesPackage{chemscheme}
-  [2010/01/30 v2.0f Schemes for chemistry] 
+  [2010/03/29 v2.0g Schemes for chemistry] 
 \RequirePackage{kvoptions,psfrag}
 \SetupKeyvalOptions{
   family=cst,
   prefix=cst@
 }
+%    \end{macrocode}
+%
+% There is a lot of confusion about XeTeX: hopefully a warning will
+% sort this.    
+%    \begin{macrocode}
+\begingroup\expandafter\expandafter\expandafter\endgroup
+\expandafter\ifx\csname XeTeXrevision\endcsname\relax
+\else
+  \PackageWarning{chemscheme}
+    {XeTeX in use: \string\schemeref\space will not work}
+\fi
 %    \end{macrocode}
 %    
 % Users of the \pkg{achemso} class should not load \pkg{chemscheme}.
@@ -2296,7 +2308,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*angew>    
 \ProvidesFile{angew.chemstyle.cfg}
-  [2010/01/30 v2.0f Angew. Chem. journal style]
+  [2010/03/29 v2.0g Angew. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = false
@@ -2318,7 +2330,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*ic>    
 \ProvidesFile{ic.chemstyle.cfg}
-  [2010/01/30 v2.0f Inorg. Chem. journal style]
+  [2010/03/29 v2.0g Inorg. Chem. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2353,7 +2365,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jacs>    
 \ProvidesFile{jacs.chemstyle.cfg}
-  [2010/01/30 v2.0f J. Am. Chem. Soc. journal style]
+  [2010/03/29 v2.0g J. Am. Chem. Soc. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2386,7 +2398,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jomc>    
 \ProvidesFile{jomc.chemstyle.cfg}
-  [2010/01/30 v2.0f J. Organomet. Chem. journal style]
+  [2010/03/29 v2.0g J. Organomet. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = true,
@@ -2410,7 +2422,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jpc>    
 \ProvidesFile{jpc.chemstyle.cfg}
-  [2010/01/30 v2.0f J. Phys. Chem. journal style]
+  [2010/03/29 v2.0g J. Phys. Chem. journal style]
 \DeclareCaptionFormat{labelcaps}{\MakeUppercase{#1}#2#3}
 \captionsetup{
   font            = bf,
@@ -2444,7 +2456,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*orglett>    
 \ProvidesFile{orglett.chemstyle.cfg}
-  [2010/01/30 v2.0f Org. Lett. journal style]
+  [2010/03/29 v2.0g Org. Lett. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = bf,
@@ -2568,7 +2580,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*rsc>    
 \ProvidesFile{rsc.chemstyle.cfg}
-  [2010/01/30 v2.0f RSC journal style]
+  [2010/03/29 v2.0g RSC journal style]
 \captionsetup{
   labelsep  = quad,
   labelfont = bf
@@ -2584,7 +2596,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*tetlett>    
 \ProvidesFile{tetlett.chemstyle.cfg}
-  [2010/01/30 v2.0f Tetrahedron Lett. journal style]
+  [2010/03/29 v2.0g Tetrahedron Lett. journal style]
 \captionsetup{
   labelsep        = period,
   labelfont       = bf,
