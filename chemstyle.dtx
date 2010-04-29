@@ -70,6 +70,7 @@ This work consists of the file  chemstyle.dtx and
                                 chemstyle.ins,
                                 chemstyle.sty,
                                 chemscheme.sty,
+                                and a number of .cfg files.
                                 
 \endpostamble
 \usedir{tex/latex/chemstyle}
@@ -107,8 +108,6 @@ This work consists of the file  chemstyle.dtx and
 \else
   \expandafter\endgroup
 \fi
-\immediate\write18{makeindex -s gglo.ist -o chemstyle.gls chemstyle.glo}
-\immediate\write18{makeindex -s gind.ist -o chemstyle.ind chemstyle.idx}
 %</internal>
 %<*package|chemscheme>
 \NeedsTeXFormat{LaTeX2e}
@@ -374,12 +373,23 @@ This work consists of the file  chemstyle.dtx and
 %  \item either \pkg{siunitx} or \pkg{SIunits} (otherwise no 
 %    units are defined);
 %  \item \pkg{psfrag};
-%  \item \pkg{varioref} (part of the standard \pkg{tools} bundle);
+%  \item \pkg{varioref} (part of the standard \pkg{tools} bundle):
+%    only loaded if not turned off;
 %  \item \pkg{xspace} (part of the standard \pkg{tools} bundle).
 %\end{itemize} 
 % These are normally present in the current major \TeX\ distributions,
 % but are also available from \href{http://www.ctan.org}{The 
 % Comprehensive TeX Archive Network}.
+% 
+%\DescribeOption{varioref}
+%\changes{v2.0a}{2009/08/23}{New \opt{varioref} option}
+% The option \opt{varioref} can be used to determine whether 
+% \pkg{chemstyle} loads the \pkg{varioref} package. For example,
+% users of \pkg{cleveref} will want to turn off loading of
+% \pkg{varioref} using:
+%\begin{LaTeXdemo}[code only]
+%  \usepackage[varioref=false]{chemstyle}
+%\end{LaTeXdemo} 
 % 
 %\section{The \pkg{chemstyle} package: tools for chemistry}
 %
@@ -905,7 +915,7 @@ This work consists of the file  chemstyle.dtx and
 %
 % \pkg{chemstyle} and \pkg{chemscheme} are designed to avoid, as far as
 % possible, clashes with other packages.  The standard packages
-% \pkg{graphicx} and \pkg{varioref} are used by the budnle. If you 
+% \pkg{graphicx} and \pkg{varioref} are used by the bundle. If you 
 % need to load these with specific options, this needs to be done
 % \emph{before} loading \pkg{chemstyle} (or \pkg{chemscheme}). 
 %
@@ -978,8 +988,8 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*package> 
 \ProvidesPackage{chemstyle}
-  [2009/06/06 v2.0 Schemes and style for chemistry]   
-\RequirePackage{amstext,caption,chemscheme,varioref,xspace}
+  [2009/10/26 v2.0b Schemes and style for chemistry]   
+\RequirePackage{amstext,caption,chemscheme,xspace}
 \SetupKeyvalOptions{
   family=cst,
   prefix=cst@
@@ -1001,6 +1011,7 @@ This work consists of the file  chemstyle.dtx and
 %\begin{macro}{\ifcst@radhyphen}
 %\begin{macro}{\ifcst@radpreix}
 %\begin{macro}{\ifcst@radsuper}
+%\begin{macro}{\ifcst@varioref}
 %\begin{macro}{\ifcst@xspace}
 % Some simple Boolean options.
 %    \begin{macrocode}
@@ -1013,8 +1024,10 @@ This work consists of the file  chemstyle.dtx and
 \DeclareBoolOption[true]{radhyphen}
 \DeclareBoolOption[true]{radprefix}
 \DeclareBoolOption[false]{radsuper}
+\DeclareBoolOption[true]{varioref}
 \DeclareBoolOption[true]{xspace}
 %    \end{macrocode}
+%\end{macro} 
 %\end{macro} 
 %\end{macro}
 %\end{macro}
@@ -1042,7 +1055,8 @@ This work consists of the file  chemstyle.dtx and
 \DeclareStringOption{language}
 \setkeys{cst}{%
   journal  = ,
-  language = english
+  language = english,
+  varioref = true
 }
 %    \end{macrocode}
 %\end{macro}
@@ -1462,21 +1476,6 @@ This work consists of the file  chemstyle.dtx and
 %\end{macro}
 %\end{macro}
 %
-%\subsection{Cross-references}
-%
-% The naming for cross-references is sorted out properly using the
-% \pkg{varioref} package. Schemes are done at the start of the document
-% as the definition of \cs{schemename} may not exist yet.
-%    \begin{macrocode}
-\labelformat{figure}{\figurename~#1}
-\labelformat{table}{\tablename~#1}
-\AtEndOfPackage{%
-  \AtBeginDocument{%
-    \labelformat{scheme}{\schemename~#1}%
-  }%
-}
-%    \end{macrocode}
-%    
 % \subsection{Handling reference section naming}
 %
 %\begin{macro}{bibnote}
@@ -1667,6 +1666,24 @@ This work consists of the file  chemstyle.dtx and
 \ProcessKeyvalOptions{cst}
 %    \end{macrocode}
 %    
+%\subsection{Cross-references}
+%
+% The naming for cross-references is sorted out properly using the
+% \pkg{varioref} package. Schemes are done at the start of the document
+% as the definition of \cs{schemename} may not exist yet.
+%    \begin{macrocode}
+\ifcst@varioref
+  \RequirePackage{varioref}
+  \labelformat{figure}{\figurename~#1}
+  \labelformat{table}{\tablename~#1}
+  \AtEndOfPackage{%
+    \AtBeginDocument{%
+      \labelformat{scheme}{\schemename~#1}%
+    }%
+  }
+\fi
+%    \end{macrocode}
+%    
 %\subsection{Float formatting}
 %
 %\begin{macro}{\cst@float@memoir@correct}
@@ -1749,7 +1766,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*chemscheme>
 \ProvidesPackage{chemscheme}
-  [2009/06/06 v2.0 Schemes for chemistry] 
+  [2009/10/26 v2.0b Schemes for chemistry] 
 \RequirePackage{kvoptions,psfrag}
 \SetupKeyvalOptions{
   family=cst,
@@ -2022,7 +2039,12 @@ This work consists of the file  chemstyle.dtx and
     }%
   }%
 }
-\ifx\cst@float@pkg\cst@opt@memoir\else
+%    \end{macrocode}
+%\changes{v2.0b}{2009/10/26}{logic for undefining \cs{newfloat} 
+%  corrected}
+% If \pkg{memoir} is in use, delete the \cs{newfloat} macro.
+%    \begin{macrocode}
+\ifx\cst@float@pkg\cst@opt@memoir
   \let\newfloat\@undefined
 \fi
 \@ifpackageloaded{chemstyle}{}{%
@@ -2233,7 +2255,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*angew>    
 \ProvidesFile{angew.chemstyle.cfg}
-  [2009/06/06 v2.0 Angew. Chem. journal style]
+  [2009/10/26 v2.0b Angew. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = false
@@ -2255,7 +2277,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*ic>    
 \ProvidesFile{ic.chemstyle.cfg}
-  [2009/06/06 v2.0 Inorg. Chem. journal style]
+  [2009/10/26 v2.0b Inorg. Chem. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2288,7 +2310,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jacs>    
 \ProvidesFile{jacs.chemstyle.cfg}
-  [2009/06/06 v2.0 J. Am. Chem. Soc. journal style]
+  [2009/10/26 v2.0b J. Am. Chem. Soc. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2321,7 +2343,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jomc>    
 \ProvidesFile{jomc.chemstyle.cfg}
-  [2009/06/06 v2.0 J. Organomet. Chem. journal style]
+  [2009/10/26 v2.0b J. Organomet. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = true,
@@ -2345,7 +2367,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jpc>    
 \ProvidesFile{jpc.chemstyle.cfg}
-  [2009/06/06 v2.0 J. Phys. Chem. journal style]
+  [2009/10/26 v2.0b J. Phys. Chem. journal style]
 \DeclareCaptionFormat{labelcaps}{\MakeUppercase{#1}#2#3}
 \captionsetup{
   font            = bf,
@@ -2379,7 +2401,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*orglett>    
 \ProvidesFile{orglett.chemstyle.cfg}
-  [2009/06/06 v2.0 Org. Lett. journal style]
+  [2009/10/26 v2.0b Org. Lett. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = bf,
@@ -2503,7 +2525,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*rsc>    
 \ProvidesFile{rsc.chemstyle.cfg}
-  [2009/06/06 v2.0 RSC journal style]
+  [2009/10/26 v2.0b RSC journal style]
 \captionsetup{
   labelsep  = quad,
   labelfont = bf
@@ -2519,7 +2541,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*tetlett>    
 \ProvidesFile{tetlett.chemstyle.cfg}
-  [2009/06/06 v2.0 Tetrahedron Lett. journal style]
+  [2009/10/26 v2.0b Tetrahedron Lett. journal style]
 \captionsetup{
   labelsep        = period,
   labelfont       = bf,
