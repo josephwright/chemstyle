@@ -476,15 +476,9 @@ This work consists of the file  chemstyle.dtx and
 %\DescribeMacro{\molar}
 %\DescribeMacro{\Molar}
 %\DescribeMacro{\mmHg}
-% Both the \pkg{SIunits} and \pkg{unitsdef} packages provide methods
-% for handling a range of units, but do not include a small number of
-% unit macros useful to chemists.  In contrast, the \pkg{siunitx}
-% package provides all of these using the \opt{synchem} module.  If
-% \pkg{SIunits} or \pkg{unitsdef} are loaded, \pkg{chemstyle} provides
-% the missing units.  On the other hand, if no unit package is loaded,
-% \pkg{siunitx} is loaded and provides the units itself: if 
-% \pkg{siunitx} is not available on the system, \emph{these macros are
-% not defined}.
+% There are a few units which are useful for chemists that are not 
+% defined by the standard unit packages and are created here if 
+% necessary.
 %\begin{LaTeXdemo}
 %  \SI{10}{\cmc}   \\
 %  \SI{20}{\Hz}    \\
@@ -998,7 +992,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*package> 
 \ProvidesPackage{chemstyle}
-  [2010/04/13 v2.0h Schemes and style for chemistry]   
+  [2010/06/06 v2.0i Schemes and style for chemistry]   
 \RequirePackage{amstext,caption,chemscheme,xspace}
 \SetupKeyvalOptions{
   family=cst,
@@ -1178,18 +1172,14 @@ This work consists of the file  chemstyle.dtx and
 %\begin{macro}{\mmHg}
 %\begin{macro}{\mol}
 %\changes{v2.0d}{2009/11/26}{Fix bug with \pkg{KOMA-Script}}
-% The \pkg{siunitx} package provides all of the units desired here.
-% So if it is loaded, the module \opt{synchem} is all that needs to
-% be loaded.  
+% The units are provided if necessary.  
 %    \begin{macrocode}
-\@ifpackageloaded{siunitx}{
-  \requiresiconfigs{synchem}
+\@ifpackageloaded{siunitx}{%
 }{%
   \@ifpackageloaded{SIunits}{}{%
     \@ifpackageloaded{unitsdef}{}{%
       \IfFileExists{siunitx.sty}{%
         \RequirePackage{siunitx}
-        \AtBeginDocument{\requiresiconfigs{synchem}}%
       }{%
         \IfFileExists{SIunits.sty}{%
           \RequirePackage{SIunits}
@@ -1203,6 +1193,15 @@ This work consists of the file  chemstyle.dtx and
     }
   }
 }
+\@ifpackageloaded{siunitx}{%
+  \sisetup{load-configurations = abbreviations}
+  \DeclareSIUnit\cubiccentimeter{\cubic\centi\metre}
+  \DeclareSIUnit\cmc{\cubic\centi\metre}
+  \DeclareSIUnit\molar{\mole\per\cubic\deci\metre}
+  \DeclareSIUnit\Molar{\textsc{m}}
+  \DeclareSIUnit\torr{torr}
+  \sisetup{load-configurations = abbreviations}
+}{}
 \@ifpackageloaded{SIunits}{%
   \newcommand*\cubiccentimeter{\centi\metre\cubed}
   \newcommand*\Molar{\textsc{m}}
@@ -1791,7 +1790,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*chemscheme>
 \ProvidesPackage{chemscheme}
-  [2010/04/13 v2.0h Schemes for chemistry] 
+  [2010/06/06 v2.0i Schemes for chemistry] 
 \RequirePackage{kvoptions,psfrag}
 \SetupKeyvalOptions{
   family=cst,
@@ -2306,7 +2305,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*angew>    
 \ProvidesFile{angew.chemstyle.cfg}
-  [2010/04/13 v2.0h Angew. Chem. journal style]
+  [2010/06/06 v2.0i Angew. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = false
@@ -2328,7 +2327,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*ic>    
 \ProvidesFile{ic.chemstyle.cfg}
-  [2010/04/13 v2.0h Inorg. Chem. journal style]
+  [2010/06/06 v2.0i Inorg. Chem. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2363,7 +2362,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jacs>    
 \ProvidesFile{jacs.chemstyle.cfg}
-  [2010/04/13 v2.0h J. Am. Chem. Soc. journal style]
+  [2010/06/06 v2.0i J. Am. Chem. Soc. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2396,7 +2395,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jomc>    
 \ProvidesFile{jomc.chemstyle.cfg}
-  [2010/04/13 v2.0h J. Organomet. Chem. journal style]
+  [2010/06/06 v2.0i J. Organomet. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = true,
@@ -2420,7 +2419,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jpc>    
 \ProvidesFile{jpc.chemstyle.cfg}
-  [2010/04/13 v2.0h J. Phys. Chem. journal style]
+  [2010/06/06 v2.0i J. Phys. Chem. journal style]
 \DeclareCaptionFormat{labelcaps}{\MakeUppercase{#1}#2#3}
 \captionsetup{
   font            = bf,
@@ -2454,7 +2453,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*orglett>    
 \ProvidesFile{orglett.chemstyle.cfg}
-  [2010/04/13 v2.0h Org. Lett. journal style]
+  [2010/06/06 v2.0i Org. Lett. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = bf,
@@ -2578,7 +2577,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*rsc>    
 \ProvidesFile{rsc.chemstyle.cfg}
-  [2010/04/13 v2.0h RSC journal style]
+  [2010/06/06 v2.0i RSC journal style]
 \captionsetup{
   labelsep  = quad,
   labelfont = bf
@@ -2594,7 +2593,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*tetlett>    
 \ProvidesFile{tetlett.chemstyle.cfg}
-  [2010/04/13 v2.0h Tetrahedron Lett. journal style]
+  [2010/06/06 v2.0i Tetrahedron Lett. journal style]
 \captionsetup{
   labelsep        = period,
   labelfont       = bf,
