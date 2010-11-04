@@ -992,7 +992,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*package> 
 \ProvidesPackage{chemstyle}
-  [2010/06/06 v2.0i Schemes and style for chemistry]   
+  [2010/11/04 v2.0j Schemes and style for chemistry]   
 \RequirePackage{amstext,caption,chemscheme,xspace}
 \SetupKeyvalOptions{
   family=cst,
@@ -1790,7 +1790,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*chemscheme>
 \ProvidesPackage{chemscheme}
-  [2010/06/06 v2.0i Schemes for chemistry] 
+  [2010/11/04 v2.0j Schemes for chemistry] 
 \RequirePackage{kvoptions,psfrag}
 \SetupKeyvalOptions{
   family=cst,
@@ -2117,6 +2117,8 @@ This work consists of the file  chemstyle.dtx and
 %\end{macro}
 %\end{macro}
 %
+%\changes{v2.0j}{2010/11/04}{Include \texttt{ngerman} in \pkg{babel}
+%  support}
 % Some simple label changes.
 %    \begin{macrocode}
 \AtBeginDocument{%
@@ -2126,6 +2128,10 @@ This work consists of the file  chemstyle.dtx and
       \def\schemename{{\scshape Sch\`eme}}%
     }%
     \addto{\captionsgerman}{%
+      \def\listschemename{Schemenverzeichnis}%
+      \def\schemename{Schema}%
+    }%
+    \addto{\captionsngerman}{%
       \def\listschemename{Schemenverzeichnis}%
       \def\schemename{Schema}%
     }%
@@ -2305,7 +2311,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*angew>    
 \ProvidesFile{angew.chemstyle.cfg}
-  [2010/06/06 v2.0i Angew. Chem. journal style]
+  [2010/11/04 v2.0j Angew. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = false
@@ -2327,7 +2333,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*ic>    
 \ProvidesFile{ic.chemstyle.cfg}
-  [2010/06/06 v2.0i Inorg. Chem. journal style]
+  [2010/11/04 v2.0j Inorg. Chem. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2362,7 +2368,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jacs>    
 \ProvidesFile{jacs.chemstyle.cfg}
-  [2010/06/06 v2.0i J. Am. Chem. Soc. journal style]
+  [2010/11/04 v2.0j J. Am. Chem. Soc. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = {bf,it,sf},
@@ -2395,7 +2401,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jomc>    
 \ProvidesFile{jomc.chemstyle.cfg}
-  [2010/06/06 v2.0i J. Organomet. Chem. journal style]
+  [2010/11/04 v2.0j J. Organomet. Chem. journal style]
 \setkeys{cst}{
   abbremph  = false,
   radhyphen = true,
@@ -2419,7 +2425,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*jpc>    
 \ProvidesFile{jpc.chemstyle.cfg}
-  [2010/06/06 v2.0i J. Phys. Chem. journal style]
+  [2010/11/04 v2.0j J. Phys. Chem. journal style]
 \DeclareCaptionFormat{labelcaps}{\MakeUppercase{#1}#2#3}
 \captionsetup{
   font            = bf,
@@ -2453,7 +2459,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*orglett>    
 \ProvidesFile{orglett.chemstyle.cfg}
-  [2010/06/06 v2.0i Org. Lett. journal style]
+  [2010/11/04 v2.0j Org. Lett. journal style]
 \DeclareCaptionLabelSeparator{perquad}{.\quad}
 \captionsetup{
   labelfont       = bf,
@@ -2577,7 +2583,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*rsc>    
 \ProvidesFile{rsc.chemstyle.cfg}
-  [2010/06/06 v2.0i RSC journal style]
+  [2010/11/04 v2.0j RSC journal style]
 \captionsetup{
   labelsep  = quad,
   labelfont = bf
@@ -2593,7 +2599,7 @@ This work consists of the file  chemstyle.dtx and
 %    \begin{macrocode}
 %<*tetlett>    
 \ProvidesFile{tetlett.chemstyle.cfg}
-  [2010/06/06 v2.0i Tetrahedron Lett. journal style]
+  [2010/11/04 v2.0j Tetrahedron Lett. journal style]
 \captionsetup{
   labelsep        = period,
   labelfont       = bf,
