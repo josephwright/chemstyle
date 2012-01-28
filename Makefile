@@ -153,9 +153,9 @@ doc: $(foreach FILE,$(INCLUDEPDF),$(FILE).pdf)
 localinstall: unpack
 	echo "Installing files"
 	TEXMFHOME=`kpsewhich --var-value=TEXMFHOME` ; \
-	rm -rf $$TEXMFHOME/tex/$(PACKAGEROOT)/*.* ; \
-	cp *.sty $$TEXMFHOME/tex/$(PACKAGEROOT)/ ; \
-	texhash &> /dev/null
+	mkdir -p $$TEXMFHOME/tex/$(PACKAGEROOT)/ ; \
+	rm -rf $$TEXMFHOME/tex/$(PACKAGEROOT)/* ; \
+	cp *.sty $$TEXMFHOME/tex/$(PACKAGEROOT)/
 	
 tds: doc
 	echo "Creating TDS archive"
