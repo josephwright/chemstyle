@@ -1857,7 +1857,9 @@ This work consists of the file  chemstyle.dtx and
   \fi
 }
 \newcommand*\cst@opt@bpchem{bpchem}
+\@onelevel@sanitize\cst@opt@bpchem
 \newcommand*\cst@opt@chemcompounds{chemcompounds}
+\@onelevel@sanitize\cst@opt@chemcompounds
 \newcommand*\cst@opt@ref@error{%
   \PackageWarning{chemscheme}{%
     Value `\KVO@param' is not supported by\MessageBreak
