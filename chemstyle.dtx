@@ -40,6 +40,7 @@ because of the number of demonstration items included in the
 text. To compile the documentation without error, you will 
 need the packages:
  - `booktabs`
+ - `csquotes`
  - `helvet`
  - `mathpazo`
  - `mhchem`
@@ -133,7 +134,7 @@ This work consists of the file  chemstyle.dtx and
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
 \usepackage[T1]{fontenc}
-\usepackage{array,booktabs,chemstyle,lmodern}
+\usepackage{array,booktabs,chemstyle,csquotes,lmodern}
 \usepackage[scaled=0.95]{helvet}
 \usepackage[final]{listings,microtype}
 \usepackage[osf]{mathpazo}
@@ -338,7 +339,7 @@ This work consists of the file  chemstyle.dtx and
 %  for chemical schemes.  The package also provides a method for adding 
 %  automatic chemical numbering to schemes.
 %
-%  The \textsf{chemstyle} package provides a ``one-stop shop'' for 
+%  The \textsf{chemstyle} package provides a \enquote{one-stop shop} for 
 %  setting up formatting of \LaTeX\ documents following the editorial
 %  policies of various chemical journals.  It provides a number of handy
 %  chemistry-related commands, and loads several support packages to aid 
@@ -387,7 +388,7 @@ This work consists of the file  chemstyle.dtx and
 % (pdf)\TeX\ on \file{chemstyle.dtx}. This will produce all of the 
 % package files, and also \file{README.txt}.  To extract the
 % files and build the documentation, run (pdf)\LaTeX\ on 
-% \texttt{chemstyle.dtx}: you will need to enable ``write18'' if 
+% \texttt{chemstyle.dtx}: you will need to enable \enquote{write18} if 
 % you compile in PDF mode.
 %
 %\section{Requirements}
@@ -466,9 +467,9 @@ This work consists of the file  chemstyle.dtx and
 % \pkg{chemstyle} alters the naming of the references section of a 
 % document. By default, \pkg{chemstyle} alters the value of \cs{bibname} 
 % or \cs{refname} (as appropriate) to the form of words chosen by the
-% target journal for the ``References'' section.
+% target journal for the \enquote{References} section.
 %
-% The ``\refname'' naming commands are language-aware, \emph{via} the
+% The \enquote{\refname} naming commands are language-aware, \emph{via} the
 % \pkg{babel} interface.  Currently, \pkg{chemstyle} includes appropriate
 % labels for \pkg{babel} languages \opt{english}, \opt{german}, 
 % \opt{french} and \opt{italian}. Other languages can be added if appropriate
@@ -481,15 +482,15 @@ This work consists of the file  chemstyle.dtx and
 % The package recognises the \opt{notes} option for controlling how
 % the references section is named.  The accepts the values
 % \opt{true}, \opt{false} and \opt{auto}.  The Boolean values either
-% enable or disable the addition of ``Notes and'' to the
-% ``References'' of the section title.  The \opt{auto} option works
+% enable or disable the addition of \enquote{Notes and} to the
+% \enquote{References} of the section title.  The \opt{auto} option works
 % in conjunction with the \pkg{notes2bib} package.  If notes are
-% added, ``Notes and'' is included in the section title, whereas if
-% no notes are given the section title remains as ``References''.
+% added, \enquote{Notes and} is included in the section title, whereas if
+% no notes are given the section title remains as \enquote{References}.
 % The \opt{nonotes} option is equivalent to \opt{notes=false}.
 % The second option for this area is \opt{notesbefore}.  This takes
-% \opt{true} and \opt{false} only, and sets whether ``Notes and
-% References'' or ``References and Notes'' is produced.
+% \opt{true} and \opt{false} only, and sets whether \enquote{Notes and
+% References} or \enquote{References and Notes} is produced.
 % 
 %\subsection{Additional units}
 %
@@ -561,10 +562,10 @@ This work consists of the file  chemstyle.dtx and
 %\end{LaTeXdemo}
 %
 %\DescribeOption{abbrcomma}
-% For American journals, where it is obligatory to follow ``\eg'' and
-% ``\ie'' with a comma, the package provides a mechanism for handling
+% For American journals, where it is obligatory to follow \enquote{\eg} and
+% \enquote{\ie} with a comma, the package provides a mechanism for handling
 % this automatically.  Thus, when using an appropriate journal style,
-% |\eg|, |\eg.| and |\eg,| will all result in typesetting ``\eg,''.
+% |\eg|, |\eg.| and |\eg,| will all result in typesetting \enquote{\eg,}.
 % The Boolean package option \opt{abbrcomma} controls this.
 %\begin{LaTeXdemo}
 %  \eg this\\
@@ -736,9 +737,9 @@ This work consists of the file  chemstyle.dtx and
 % popular chemistry drawing package, \textsc{ChemDraw}, is able to do
 % this from the \texttt{Save As \ldots} dialogue. The positions where 
 % the auto-labels should be have to be marked in the EPS file. The 
-% marker should consist of an ``indicator'' that the text is to be 
+% marker should consist of an \enquote{indicator} that the text is to be 
 % replaced, followed by a reference number or letter.  For automated 
-% substitution, the ``indicator'' text should be the same in all 
+% substitution, the \enquote{indicator} text should be the same in all 
 % graphics.
 % 
 %\DescribeMacro{\schemeref}
@@ -787,7 +788,7 @@ This work consists of the file  chemstyle.dtx and
 % obtain good alignment of labels and structures.
 % 
 %\DescribeMacro{\schemerefmarker}
-% When using automatic substitution mode, the ``marker'' text to be
+% When using automatic substitution mode, the \enquote{marker} text to be
 % searched for is stored as \cs{schemerefmarker}, which has
 % default value \texttt{\schemerefmarker}. Thus the graphics should 
 % contain labels \textsf{\schemerefmarker1}, \textsf{\schemerefmarker2}, 
@@ -834,7 +835,7 @@ This work consists of the file  chemstyle.dtx and
 %\DescribeMacro{\floatcontentsleft}
 %\DescribeMacro{\floatcontentsright}
 % The \LaTeX\ default is to position all float contents flush-left.
-% There is no ``hook'' provided to alter this.  The \pkg{chemscheme}
+% There is no \enquote{hook} provided to alter this.  The \pkg{chemscheme}
 % package therefore provides commands to align all float contents
 % automatically.  As the macro names make clear,
 % \cs{floatcontentscentre} will make all floats centred (for users
@@ -897,7 +898,7 @@ This work consists of the file  chemstyle.dtx and
 % other hand, the ppch\TeX\ system, developed originally for
 % Con\TeX{}t, is available. Both systems suffer from the lack of
 % chemical logic in the input: it is very hard to tell from the code
-% what is being represented. Drawing items such as ``curly arrows'',
+% what is being represented. Drawing items such as \enquote{curly arrows},
 % or making subtle alterations to positioning, is very challenging in
 % purely macro-based systems.  For these reasons, it is usually much
 % more sensible to examine the available graphical methods.
@@ -917,7 +918,7 @@ This work consists of the file  chemstyle.dtx and
 % abilities of dedicated software become a necessity. As well as the
 % already-mentioned \textsc{ChemDraw}, programs such as \textsc{ISIS
 % Draw} and \textsc{ChemSketch} are available free for personal
-% use;\footnote{``Free'' as in without charge, not as in open
+% use;\footnote{\enquote{Free} as in without charge, not as in open
 % source.} these programs are all Windows specific.  In the
 % open-source arena, there are a number of packages such as
 % \textsc{XDrawChem} and \textsc{BKchem}, which offer cross-platform
@@ -1257,7 +1258,7 @@ This work consists of the file  chemstyle.dtx and
 %\begin{macro}{\standardstate}
 %\begin{macro}{\cst@standardstate}
 %\begin{macro}{\cst@standardstate@aux}
-% The ``standard state'' symbol is handy. This definition is adapted 
+% The \enquote{standard state} symbol is handy. This definition is adapted 
 % from one posted several times to \texttt{comp.text.tex} by Donald 
 % Arseneau.
 %    \begin{macrocode}
@@ -2015,7 +2016,7 @@ This work consists of the file  chemstyle.dtx and
 %
 %\begin{macro}{\cst@float@make@float}
 % When using \pkg{float}, definition depends on the existence of
-% chapters. The name and ``list of'' macros are then created separately.
+% chapters. The name and \enquote{list of} macros are then created separately.
 %    \begin{macrocode}
 \newcommand*\cst@float@make@float{%
   \begingroup\expandafter\expandafter\expandafter\endgroup
