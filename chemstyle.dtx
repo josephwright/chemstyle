@@ -470,9 +470,9 @@ This work consists of the file  chemstyle.dtx and
 %
 % The ``\refname'' naming commands are language-aware, \emph{via} the
 % \pkg{babel} interface.  Currently, \pkg{chemstyle} includes appropriate
-% labels for \pkg{babel} languages \opt{english}, \opt{german} and 
-% \opt{french}. Other languages can be added if appropriate wordings are
-% provided to the author. The naming system is designed to work 
+% labels for \pkg{babel} languages \opt{english}, \opt{german}, 
+% \opt{french} and \opt{italian}. Other languages can be added if appropriate
+% wordings are provided to the author. The naming system is designed to work 
 % correctly with both \pkg{natbib} and \pkg{biblatex}.
 %
 %\DescribeOption{notes}
@@ -1569,6 +1569,7 @@ This work consists of the file  chemstyle.dtx and
 %\end{macro}
 %
 %\begin{macro}{\cst@refsec@lang}
+% \changes{v2.0m}{2013/07/03}{Add phrase translations for Italian}
 %\begin{macro}{\cst@refsec@lang@clist}
 %\begin{macro}{\cst@refsec@lang@define}
 % The language-dependent definitions are created.
@@ -1594,6 +1595,7 @@ This work consists of the file  chemstyle.dtx and
 \cst@refsec@lang@define{german}{Literatur}{und}{Notizen}
 \cst@refsec@lang@define{french}{R\'ef\'erences}{et}{Notes}
 \cst@refsec@lang@define{frenchb}{R\'ef\'erences}{et}{Notes}
+\cst@refsec@lang@define{italian}{Bibliografia}{e}{Note}
 %    \end{macrocode}
 %\end{macro}
 %\end{macro}
@@ -2143,6 +2145,7 @@ This work consists of the file  chemstyle.dtx and
 %
 %\changes{v2.0j}{2010/11/04}{Include \texttt{ngerman} in \pkg{babel}
 %  support}
+% \changes{v2.0m}{2013/07/03}{Add phrase translations for Italian}
 % Some simple label changes.
 %    \begin{macrocode}
 \AtBeginDocument{%
@@ -2157,6 +2160,10 @@ This work consists of the file  chemstyle.dtx and
     }%
     \addto{\captionsngerman}{%
       \def\listschemename{Schemenverzeichnis}%
+      \def\schemename{Schema}%
+    }%
+    \addto{\captionsitalian}{%
+      \def\listschemename{Lista degli schemi}%
       \def\schemename{Schema}%
     }%
     \expandafter\selectlanguage\expandafter{\languagename}%
